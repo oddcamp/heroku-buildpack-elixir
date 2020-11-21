@@ -198,6 +198,9 @@ bin/run $BUILDPACK
 
 See more info at https://github.com/jesseshieh/heroku-buildpack-testrunner/blob/master/README.md
 
-## Credits
+## License
 
-&copy; Akash Manohar under The MIT License. Feel free to do whatever you want with it.
+This project is licensed under the Apache 2.0 license, see the full text [here](LICENSE).
+
+&copy; [Akash Manohar](https://github.com/HashNuke) 2014
+&copy; [Kaz Walker](https://github.com/KazW) 2020
