@@ -14,7 +14,7 @@
 #### Version support
 
 * Erlang - Prebuilt packages (17.5, 17.4, etc)
-  * The full list of prebuilt packages can be found here: https://github.com/HashNuke/heroku-buildpack-elixir-otp-builds/blob/master/otp-versions
+  * The full list of prebuilt packages can be found here: https://github.com/heroku-elixir/otp-builds/blob/master/otp-versions
   * Note: if a version you want is missing then you can create a PR that adds it
 * Elixir - Prebuilt releases (1.0.4, 1.0.3, etc) or prebuilt branches (master, v1.7, etc)
   * The full list of releases can be found here: https://github.com/elixir-lang/elixir/releases
@@ -27,40 +27,40 @@ Note: you should choose an Elixir and Erlang version that are [compatible with o
 #### Create a Heroku app with this buildpack
 
 ```
-heroku create --buildpack hashnuke/elixir
+heroku create --buildpack heroku-elixir/elixir-buildpack
 ```
 
 #### Set the buildpack for an existing Heroku app
 
 ```
-heroku buildpacks:set hashnuke/elixir
+heroku buildpacks:set heroku-elixir/elixir-buildpack
 ```
 
 #### Use the edge version of buildpack
 
-The `hashnuke/elixir` buildpack contains the latest published version of the buildpack, but you can use the edge version (i.e. the source code in this repo) by running:
+The `heroku-elixir/elixir-buildpack` buildpack contains the latest published version of the buildpack, but you can use the edge version (i.e. the source code in this repo) by running:
 
 ```
-heroku buildpacks:set https://github.com/HashNuke/heroku-buildpack-elixir.git
+heroku buildpacks:set https://github.com/heroku-elixir/buildpack.git
 ```
 
 When you decide to use the published or the edge version of the buildpack you should be aware that, although we attempt to maintain the buildpack for as many old Elixir and Erlang releases as possible, it is sometimes difficult since there's a matrix of 3 variables involved: Erlang version, Elixir version and Heroku stack. If your application cannot be updated for some reason and requires an older version of the buildpack then [use a specific version of buildpack](#use-a-specific-version-of-buildpack).
 
 #### Use a specific version of buildpack
 
-The methods above always use the latest version of the buildpack code. To use a specific version of the buildpack, choose a commit from the [commits](https://github.com/HashNuke/heroku-buildpack-elixir/commits/master) page. The commit SHA forms part of your buildpack url.
+The methods above always use the latest version of the buildpack code. To use a specific version of the buildpack, choose a commit from the [commits](https://github.com/heroku-elixir/buildpack/commits/master) page. The commit SHA forms part of your buildpack url.
 
-For example, if you pick the commit ["883f33e10879b4b8b030753c13aa3d0dda82e1e7"](https://github.com/HashNuke/heroku-buildpack-elixir/commit/883f33e10879b4b8b030753c13aa3d0dda82e1e7), then the buildpack url for your app would be:
+For example, if you pick the commit ["883f33e10879b4b8b030753c13aa3d0dda82e1e7"](https://github.com/heroku-elixir/buildpack/commit/883f33e10879b4b8b030753c13aa3d0dda82e1e7), then the buildpack url for your app would be:
 
 ```
-https://github.com/HashNuke/heroku-buildpack-elixir.git#883f33e10879b4b8b030753c13aa3d0dda82e1e7
+https://github.com/heroku-elixir/buildpack.git#883f33e10879b4b8b030753c13aa3d0dda82e1e7
 ```
 
 **It is recommended to use a buildpack url with a commit SHA on production apps.** This prevents the unpleasant moment when your Heroku build fails because the buildpack you use just got updated with a breaking change. Having buildpacks pinned to a specific version is like having your Hex packages pinned to a specific version in `mix.lock`.
 
 #### Using Heroku CI
 
-This buildpack supports Heroku CI. 
+This buildpack supports Heroku CI.
 
 * To enable viewing test runs on Heroku, add [tapex](https://github.com/joshwlewis/tapex) to your project.
 * To detect compilation warnings use the `hook_compile` configuration option set to `mix compile --force --warnings-as-errors`.
@@ -82,7 +82,7 @@ NOTE: This requires the master version of the buildpack (or a commit later than 
 
 Create a `elixir_buildpack.config` file in your app's root dir. The file's syntax is bash.
 
-If you don't specify a config option, then the default option from the buildpack's [`elixir_buildpack.config`](https://github.com/HashNuke/heroku-buildpack-elixir/blob/master/elixir_buildpack.config) file will be used.
+If you don't specify a config option, then the default option from the buildpack's [`elixir_buildpack.config`](https://github.com/heroku-elixir/buildpack/blob/master/elixir_buildpack.config) file will be used.
 
 
 __Here's a full config file with all available options:__
@@ -180,14 +180,14 @@ heroku config:set MY_VAR=the_value
 
 ## Development
 
-* Build scripts to build erlang are at <https://github.com/HashNuke/heroku-buildpack-elixir-otp-builds>
-* Sample app to test is available at <https://github.com/HashNuke/heroku-buildpack-elixir-test>
+* Build scripts to build erlang are at <https://github.com/heroku-elixir/otp-builds>
+* Sample app to test is available at <https://github.com/heroku-elixir/template-app>
 
 ## Testing
 
 To run tests
 ```
-git clone https://github.com/HashNuke/heroku-buildpack-elixir
+git clone https://github.com/heroku-elixir/buildpack
 export BUILDPACK="$(pwd)/heroku-buildpack-elixir"
 git clone https://github.com/jesseshieh/heroku-buildpack-testrunner
 git clone https://github.com/jesseshieh/shunit2
