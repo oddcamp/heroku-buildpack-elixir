@@ -27,6 +27,8 @@ function clean_erlang_downloads() {
 function install_erlang() {
   output_section "Installing Erlang ${erlang_version} $(erlang_changed)"
 
+  rm -rf $(erlang_backup_path)
+  mkdir -p $(erlang_backup_path)
   rm -rf $(erlang_build_path)
   mkdir -p $(erlang_build_path)
   tar zxf "$(erlang_backup_path)/$(erlang_stack_version).tar.gz" -C $(erlang_build_path) --strip-components=1
