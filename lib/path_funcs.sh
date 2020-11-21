@@ -22,18 +22,22 @@ function erlang_build_path() {
   echo "${cache_path}/erlang"
 }
 
+function erlang_backup_path() {
+  echo "${cache_path}/otp"
+}
+
 function deps_backup_path() {
-  echo $cache_path/deps_backup
+  echo "$cache_path/deps_backup"
 }
 
 function build_backup_path() {
-  echo $cache_path/build_backup
+  echo "$cache_path/build_backup"
 }
 
 function mix_backup_path() {
-  echo $cache_path/.mix
+  echo "$cache_path/.mix"
 }
 
 function hex_backup_path() {
-  echo $cache_path/.hex
+  echo "$cache_path/.hex"
 }

@@ -73,8 +73,8 @@ function export_mix_env() {
 }
 
 function check_stack() {
-  if [ "${STACK}" = "cedar" ]; then
-    echo "ERROR: cedar stack is not supported, upgrade to cedar-14"
+  if [ "${STACK}" = "heroku-16" ] || [ "${STACK}" = "cedar" ]; then
+    echo "ERROR: the current stack is not supported, upgrade to heroku-18"
     exit 1
   fi
 
@@ -125,8 +125,7 @@ function fix_elixir_version() {
   else
     output_line "Invalid Elixir version specified"
     output_line "See the README for allowed formats at:"
-    output_line "https://github.com/HashNuke/heroku-buildpack-elixir"
+    output_line "https://github.com/heroku-elixir/buildpack"
     exit 1
   fi
 }
-
