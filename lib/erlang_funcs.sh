@@ -3,7 +3,7 @@ function erlang_stack_version() {
 }
 
 function download_erlang() {
-  erlang_package_url="https://github.com/heroku-elixir/otp-builds/releases/download/"
+  erlang_package_url="https://github.com/heroku-elixir/otp-builds/releases/download"
   erlang_package_url="${erlang_package_url}/$(erlang_stack_version)/$(erlang_stack_version).tar.gz"
 
   # If a previous download does not exist, then always re-download
@@ -14,7 +14,7 @@ function download_erlang() {
     erlang_changed=true
 
     output_section "Fetching Erlang ${erlang_version} from ${erlang_package_url}"
-    curl -s ${erlang_package_url} -o "$(erlang_backup_path)/$(erlang_stack_version).tar.gz" || exit 1
+    curl -L -s ${erlang_package_url} -o "$(erlang_backup_path)/$(erlang_stack_version).tar.gz" || exit 1
   else
     output_section "Using cached Erlang ${erlang_version}"
   fi
