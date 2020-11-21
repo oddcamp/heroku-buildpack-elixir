@@ -22,7 +22,7 @@ function erlang_build_path() {
   echo "${cache_path}/erlang"
 }
 
-function erlang_backup_path() {
+function erlang_download_path() {
   echo "${cache_path}/otp"
 }
 
