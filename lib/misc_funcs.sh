@@ -73,8 +73,8 @@ function export_mix_env() {
 }
 
 function check_stack() {
-  if [ "${STACK}" = "heroku-16" ] || [ "${STACK}" = "cedar" ]; then
-    echo "ERROR: the current stack is not supported, upgrade to heroku-18"
+  if [ "${STACK}" != "heroku-16" ] && [ "${STACK}" != "heroku-18" ] && [ "${STACK}" != "heroku-20" ]; then
+    echo "ERROR: the current stack is not supported, upgrade your stack to continue"
     exit 1
   fi
 
@@ -95,6 +95,7 @@ function clean_cache() {
 
 function clear_cached_files() {
   rm -rf \
+    $(erlang_download_path) \
     $(erlang_build_path) \
     $(deps_backup_path) \
     $(build_backup_path) \
@@ -125,7 +126,7 @@ function fix_elixir_version() {
   else
     output_line "Invalid Elixir version specified"
     output_line "See the README for allowed formats at:"
-    output_line "https://github.com/heroku-elixir/buildpack"
+    output_line "https://github.com/elixir-buildpack/buildpack"
     exit 1
   fi
 }
