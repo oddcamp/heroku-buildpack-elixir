@@ -18,7 +18,7 @@ function download_erlang() {
 
 function clean_erlang_downloads() {
   rm -rf $(erlang_download_path)
-  mkdir -p $(erlang_download_path)
+  mkdir -p "$(erlang_download_path)/${erlang_version}"
 }
 
 function install_erlang() {
