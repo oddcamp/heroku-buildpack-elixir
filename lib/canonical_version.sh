@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 fetch_erlang_versions() {
-  url="https://raw.githubusercontent.com/heroku-elixir/otp-builds/master/otp-versions"
-  curl -s "$url"
+  cat "otp-versions"
 }
 
 exact_erlang_version_available() {
@@ -21,7 +20,7 @@ check_erlang_version() {
   version=$1
   exists=$(exact_erlang_version_available "$version" "$(fetch_erlang_versions)")
   if [ $exists -ne 0 ]; then
-    output_line "Sorry, Erlang $version isn't supported yet. For a list of supported versions, please see https://github.com/heroku-elixir/otp-builds#adding-new-versions-of-erlang"
+    output_line "Sorry, Erlang $version isn't supported yet. For a list of supported versions, please see https://raw.githubusercontent.com/elixir-buildpack/buildpack/master/otp-versions"
     exit 1
   fi
 }
