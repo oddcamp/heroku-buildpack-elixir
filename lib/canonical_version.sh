@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 fetch_erlang_versions() {
-  cat "otp-versions"
+  cat "lib/otp-versions"
 }
 
 exact_erlang_version_available() {
