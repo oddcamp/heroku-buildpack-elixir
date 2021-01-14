@@ -10,7 +10,15 @@ function download_erlang() {
     erlang_changed=true
 
     output_section "Fetching Erlang ${erlang_version} from ${erlang_package_url}"
-    curl -L -s ${erlang_package_url} -o "$(erlang_download_path)/${erlang_version}/${STACK}.tar.gz" || exit 1
+    erl_get_status=$(curl -s -o /dev/null -w '%{http_code}\n' ${erlang_package_url})
+
+    if [[$erl_get_status == 404]]; then
+      output_section "Sorry, Erlang ${erlang_version} isn't supported yet. For a list of supported versions, please see https://github.com/elixir-buildpack/heroku-otp/releases"
+      exit 1
+    else
+      curl -L -s ${erlang_package_url} -o "$(erlang_download_path)/${erlang_version}/${STACK}.tar.gz"
+      output_section "Downloaded Erlang ${erlang_version}"
+    fi
   else
     output_section "Using cached Erlang ${erlang_version}"
   fi
