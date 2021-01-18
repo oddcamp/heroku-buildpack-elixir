@@ -12,7 +12,7 @@ function download_erlang() {
     output_section "Fetching Erlang ${erlang_version} from ${erlang_package_url}"
     erl_get_status=$(curl -s -o /dev/null -w '%{http_code}\n' ${erlang_package_url})
 
-    if [[$erl_get_status == 404]]; then
+    if [ $erl_get_status = 404 ]; then
       output_section "Sorry, Erlang ${erlang_version} isn't supported yet. For a list of supported versions, please see https://github.com/elixir-buildpack/heroku-otp/releases"
       exit 1
     else
