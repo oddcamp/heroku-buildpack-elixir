@@ -9,7 +9,7 @@ function download_erlang() {
     # Set this so elixir will be force-rebuilt
     erlang_changed=true
 
-    output_section "Fetching Erlang ${erlang_version} from ${erlang_package_url}"
+    output_section "Fetching Erlang ${erlang_version}"
     erl_get_status=$(curl -s -o /dev/null -w '%{http_code}\n' ${erlang_package_url})
 
     if [ $erl_get_status = 404 ]; then
