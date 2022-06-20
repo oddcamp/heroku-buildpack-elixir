@@ -1,5 +1,7 @@
 # Heroku Buildpack for Elixir
 
+(just a tiny fix to remove the check of stack as we use Scalingo internally)
+
 ## Features
 
 * **Easy configuration** with `elixir_buildpack.config` file

@@ -102,10 +102,10 @@ function export_mix_env() {
 }
 
 function check_stack() {
-  if [ "${STACK}" != "heroku-16" ] && [ "${STACK}" != "heroku-18" ] && [ "${STACK}" != "heroku-20" ]; then
-    echo "ERROR: the current stack is not supported, upgrade your stack to continue"
-    exit 1
-  fi
+#  if [ "${STACK}" != "heroku-16" ] && [ "${STACK}" != "heroku-18" ] && [ "${STACK}" != "heroku-20" ]; then
+#    echo "ERROR: the current stack is not supported, upgrade your stack to continue"
+#    exit 1
+#  fi
 
   if [ ! -f "${cache_path}/stack" ] || [ $(cat "${cache_path}/stack") != "${STACK}" ]; then
     output_section "Stack changed, will rebuild"
