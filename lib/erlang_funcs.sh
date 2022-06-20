@@ -1,4 +1,5 @@
 function download_erlang() {
+  STACK=$(echo "$STACK" | sed 's/scalingo-/heroku-/g')
   erlang_package_url="https://github.com/elixir-buildpack/heroku-otp/releases/download"
   erlang_package_url="${erlang_package_url}/${erlang_version}/${STACK}.tar.gz"
 

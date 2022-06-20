@@ -25,12 +25,11 @@ function output_warning() {
   echo -e "${spacing} \e[31m$1\e[0m"
 }
 
-function output_stderr() { 
+function output_stderr() {
   # Outputs to stderr in case it is inside a function so it does not
   # disturb the return value. Useful for debugging.
-  echo "$@" 1>&2; 
+  echo "$@" 1>&2
 }
-
 
 function assert_elixir_version_set() {
   custom_config_file=$1
@@ -57,8 +56,7 @@ function load_config() {
   # Source for default versions file from buildpack first
   source "${build_pack_path}/elixir_buildpack.config"
 
-  if [ -f $custom_config_file ];
-  then
+  if [ -f $custom_config_file ]; then
     source $custom_config_file
   else
     output_line "WARNING: elixir_buildpack.config wasn't found in the app"
@@ -75,7 +73,6 @@ function load_config() {
   output_line "* Elixir ${elixir_version[0]} ${elixir_version[1]}"
 }
 
-
 function export_env_vars() {
   whitelist_regex=${2:-''}
   blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
@@ -83,7 +80,7 @@ function export_env_vars() {
     output_section "Will export the following config vars:"
     for e in $(ls $env_path); do
       echo "$e" | grep -E "$whitelist_regex" | grep -vE "$blacklist_regex" &&
-      export "$e=$(cat $env_path/$e)"
+        export "$e=$(cat $env_path/$e)"
       :
     done
   fi
@@ -102,17 +99,19 @@ function export_mix_env() {
 }
 
 function check_stack() {
-#  if [ "${STACK}" != "heroku-16" ] && [ "${STACK}" != "heroku-18" ] && [ "${STACK}" != "heroku-20" ]; then
-#    echo "ERROR: the current stack is not supported, upgrade your stack to continue"
-#    exit 1
-#  fi
+  STACK=$(echo "$STACK" | sed 's/scalingo-/heroku-/g')
+
+  if [ "${STACK}" != "heroku-16" ] && [ "${STACK}" != "heroku-18" ] && [ "${STACK}" != "heroku-20" ]; then
+    echo "ERROR: the current stack is not supported, upgrade your stack to continue"
+    exit 1
+  fi
 
   if [ ! -f "${cache_path}/stack" ] || [ $(cat "${cache_path}/stack") != "${STACK}" ]; then
     output_section "Stack changed, will rebuild"
     $(clear_cached_files)
   fi
 
-  echo "${STACK}" > "${cache_path}/stack"
+  echo "${STACK}" >"${cache_path}/stack"
 }
 
 function clean_cache() {
